@@ -1,1 +1,2 @@
 #define TAPPING_TOGGLE 3
+#define HOLD_ON_OTHER_KEY_PRESS
