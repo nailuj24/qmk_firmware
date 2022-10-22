@@ -21,9 +21,10 @@
 // Layers
 #define _BASE_MACOS 0
 #define _BASE_WINDOWS 1
-#define _FN 2
-#define _KEY_EMU 3
-#define _WIN_SPCL 4
+#define _GAMES 2
+#define _FN 3
+#define _KEY_EMU 4
+#define _WIN_SPCL 5
 
 // hijacked basic keys
 #define JK_SHFT KC_F24
@@ -49,12 +50,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LSFT_T(JK_SHFT), KC_NUBS,  KC_Z,     KC_X,  KC_C,  KC_V,  KC_B,    KC_N,  KC_M,  KC_COMM,  KC_DOT,   KC_SLSH,                RSFT_T(JK_SHFT),
     TT(_KEY_EMU),    KC_LGUI,  KC_LALT,                       KC_SPC,                          DM_PLY1,  MO(_WIN_SPCL), MO(_FN), KC_RCTL),
 
+[_GAMES] = LAYOUT_60_iso( /* Disable features that are annoying in Games */
+    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,      KC_TRNS,  KC_TRNS,  KC_TRNS,
+    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,      KC_TRNS,  KC_TRNS,
+    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,      KC_TRNS,  KC_TRNS,  KC_TRNS,
+    KC_LSFT,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,      KC_TRNS,            KC_RSFT,
+    KC_LCTL,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                TT(_KEY_EMU), KC_TRNS,  KC_TRNS,  KC_TRNS),
+
 [_FN] = LAYOUT_60_iso( /* Keyboard Functions - Fn */
-    KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_MPRV,
-    KC_TRNS,  KC_TRNS,  WINDOWS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  QK_BOOT,
-    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_MPLY,
-    KC_TRNS,  EF_DEC,   EF_INC,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  MACOS,    KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_MNXT,
-    KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                DM_REC1,  KC_TRNS,  KC_TRNS,  KC_TRNS),
+    KC_MUTE,    KC_VOLD,  KC_VOLU,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_MPRV,
+    KC_TRNS,    KC_TRNS,  WINDOWS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  QK_BOOT,
+    KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_MPLY,
+    KC_TRNS,    EF_DEC,   EF_INC,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  MACOS,    KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_MNXT,
+    TG(_GAMES), KC_TRNS,  KC_TRNS,                                KC_TRNS,                                DM_REC1,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 
 [_KEY_EMU] = LAYOUT_60_iso( /* Key Emulation - Fn2 */
     KC_GRV,       KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_DEL,
