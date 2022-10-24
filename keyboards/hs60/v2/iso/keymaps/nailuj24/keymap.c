@@ -138,6 +138,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     break;
   case RSFT_T(JK_MSHF):
     if (record->tap.count && record->event.pressed) {
+      if (_mods & MOD_MASK_SHIFT)
+        process_record_user(LSFT_T(JK_MSHF), record);
       clear_mods();
       if (_mods & MOD_MASK_CTRL)
         tap_code16(RALT(KC_9));
@@ -165,6 +167,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     break;
   case RSFT_T(JK_WSHF):
     if (record->tap.count && record->event.pressed) {
+      if (_mods & MOD_MASK_SHIFT)
+        process_record_user(LSFT_T(JK_WSHF), record);
       clear_mods();
       if (_mods & MOD_MASK_CTRL)
         tap_code16(RALT(KC_0));
@@ -173,6 +177,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       else
         tap_code16(S(KC_9));
       set_mods(_mods);
+      return false;
+    }
+    break;
+    // add modifiers to arrows if morphing
+  case KC_UP:
+  case KC_DOWN:
+  case KC_LEFT:
+  case KC_RIGHT:
+    if (IS_LAYER_ON(_MORPH) && IS_LAYER_ON(_KEY_EMU)) {
+      if (IS_LAYER_ON(_BASE_MACOS)) {
+        if (record->event.pressed)
+          register_code16(G(keycode));
+        else
+          unregister_code16(G(keycode));
+      } else {
+        if (record->event.pressed)
+          register_code16(A(keycode));
+        else
+          unregister_code16(A(keycode));
+      }
       return false;
     }
     break;
