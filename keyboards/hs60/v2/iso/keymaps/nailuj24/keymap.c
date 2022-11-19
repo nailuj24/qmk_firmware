@@ -27,9 +27,10 @@
 #define _WIN_SPCL 5
 #define _MORPH 6
 
-// hijacked basic keys
-#define JK_MSHF KC_F23
-#define JK_WSHF KC_F24
+// QMK can only send basic keycodes via Mod-Tap, hijack some
+#define JK_MSHF KC_F22
+#define JK_WSHL KC_F23
+#define JK_WSHR KC_F24
 
 enum custom_keycodes {
   MACOS = SAFE_RANGE,
@@ -49,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,          KC_1,     KC_2,     KC_3,  KC_4,  KC_5,  KC_6,    KC_7,  KC_8,  KC_9,     KC_0,     KC_MINS,       KC_EQL,  KC_BSPC,
     KC_TAB,          KC_Q,     KC_W,     KC_E,  KC_R,  KC_T,  KC_Y,    KC_U,  KC_I,  KC_O,     KC_P,     KC_LBRC,       KC_RBRC,
     KC_LCTL,         KC_A,     KC_S,     KC_D,  KC_F,  KC_G,  KC_H,    KC_J,  KC_K,  KC_L,     KC_SCLN,  KC_QUOT,       KC_NUHS, KC_ENT,
-    LSFT_T(JK_WSHF), KC_NUBS,  KC_Z,     KC_X,  KC_C,  KC_V,  KC_B,    KC_N,  KC_M,  KC_COMM,  KC_DOT,   KC_SLSH,                RSFT_T(JK_WSHF),
+    LSFT_T(JK_WSHL), KC_NUBS,  KC_Z,     KC_X,  KC_C,  KC_V,  KC_B,    KC_N,  KC_M,  KC_COMM,  KC_DOT,   KC_SLSH,                RSFT_T(JK_WSHR),
     MO(_KEY_EMU),    KC_LGUI,  KC_LALT,                       KC_SPC,                          KC_NO,    MO(_WIN_SPCL), MO(_FN), KC_RCTL),
 
 [_GAMES] = LAYOUT_60_iso( /* Disable features that are annoying in Games */
@@ -74,18 +75,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS,      KC_TRNS,   MO(_MORPH),                               KC_TRNS,                                KC_TRNS,  KC_LEFT,  KC_DOWN,  KC_RIGHT),
 
 [_WIN_SPCL] = LAYOUT_60_iso( /* Special Character Input for Windows - Mimic OSX - Fn3 */
-    KC_TRNS,      KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  RALT(KC_8), RALT(KC_9),  RALT(KC_NUBS),  RALT(KC_7)/*8*/, RALT(KC_0), KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
-    KC_TRNS,      KC_TRNS,  KC_TRNS,  RALT(KC_E), KC_TRNS,  KC_TRNS,    KC_TRNS,     KC_TRNS,        KC_TRNS,         KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,
-    KC_TRNS,      KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  KC_TRNS,    KC_TRNS,     KC_TRNS,        KC_TRNS,         RALT(KC_Q), KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
-    MO(_MORPH),   KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  KC_TRNS,    KC_TRNS,     RALT(KC_RBRC),  KC_TRNS,         KC_TRNS,    KC_TRNS,  KC_TRNS,            MO(_MORPH),
-    KC_TRNS,      KC_TRNS,  KC_TRNS,                                    KC_TRNS,                                                  KC_RALT,  KC_TRNS,  KC_TRNS,  KC_TRNS),
+    KC_TRNS,             KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  RALT(KC_8), RALT(KC_9),  RALT(KC_NUBS),  RALT(KC_7)/*8*/, RALT(KC_0), KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
+    KC_TRNS,             KC_TRNS,  KC_TRNS,  RALT(KC_E), KC_TRNS,  KC_TRNS,    KC_TRNS,     KC_TRNS,        KC_TRNS,         KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,
+    KC_TRNS,             KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  KC_TRNS,    KC_TRNS,     KC_TRNS,        KC_TRNS,         RALT(KC_Q), KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
+    LT(_MORPH, JK_WSHL), KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,  KC_TRNS,    KC_TRNS,     RALT(KC_RBRC),  KC_TRNS,         KC_TRNS,    KC_TRNS,  KC_TRNS,            LT(_MORPH, JK_WSHR),
+    KC_TRNS,             KC_TRNS,  KC_TRNS,                                    KC_TRNS,                                                  KC_RALT,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 
 [_MORPH] = LAYOUT_60_iso( /* QMK does not have Mod-Morph, emulate with a layer */
-    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  RALT(KC_MINS),  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
-    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,        KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
-    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,        KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
-    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_PGUP,  KC_TRNS,  KC_TRNS,        KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,
-    KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                                      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
+    KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  RALT(KC_MINS),  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  LCA(KC_DEL),
+    KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,        KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
+    KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,        KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
+    KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_PGUP,  KC_TRNS,  KC_TRNS,        KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,
+    KC_TRNS,   KC_TRNS,  KC_TRNS,                                KC_TRNS,                                      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 };
 
 bool caps_word_press_user(uint16_t keycode) {
@@ -121,14 +122,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed)
       set_single_persistent_default_layer(_BASE_WINDOWS);
     return false;
-    // QMK can only send basic keycodes via Mod-Tap
     // Mac Shift Braces Tap
   case LSFT_T(JK_MSHF):
     if (record->tap.count && record->event.pressed) {
       clear_mods();
       if (_mods & MOD_MASK_CTRL)
         tap_code16(RALT(KC_8));
-      else if (_mods & MOD_MASK_AG)
+      else if (_mods & MOD_BIT(KC_RALT))
         tap_code16(RALT(KC_5));
       else
         tap_code16(S(KC_8));
@@ -143,7 +143,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       clear_mods();
       if (_mods & MOD_MASK_CTRL)
         tap_code16(RALT(KC_9));
-      else if (_mods & MOD_MASK_AG)
+      else if (_mods & MOD_BIT(KC_RALT))
         tap_code16(RALT(KC_6));
       else
         tap_code16(S(KC_9));
@@ -152,30 +152,45 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     break;
     // Windows Shift Braces Tap
-  case LSFT_T(JK_WSHF):
+  case LSFT_T(JK_WSHL):
     if (record->tap.count && record->event.pressed) {
       clear_mods();
       if (_mods & MOD_MASK_CTRL)
         tap_code16(RALT(KC_7));
-      else if (_mods & MOD_MASK_AG)
-        tap_code16(RALT(KC_8));
       else
         tap_code16(S(KC_8));
       set_mods(_mods);
       return false;
     }
     break;
-  case RSFT_T(JK_WSHF):
+  case LT(_MORPH, JK_WSHL):
+    // HOLD_ON_OTHER_KEY_PRESS does not apply to LT(), so check for interrupt manually
+    if ((record->tap.interrupted) || (record->tap.count && record->event.pressed)) {
+      clear_mods();
+      tap_code16(RALT(KC_8));
+      set_mods(_mods);
+      return false;
+    }
+    break;
+  case RSFT_T(JK_WSHR):
     if (record->tap.count && record->event.pressed) {
       if (_mods & MOD_MASK_SHIFT)
-        process_record_user(LSFT_T(JK_WSHF), record);
+        process_record_user(LSFT_T(JK_WSHL), record);
       clear_mods();
       if (_mods & MOD_MASK_CTRL)
         tap_code16(RALT(KC_0));
-      else if (_mods & MOD_MASK_AG)
-        tap_code16(RALT(KC_9));
       else
         tap_code16(S(KC_9));
+      set_mods(_mods);
+      return false;
+    }
+    break;
+  case LT(_MORPH, JK_WSHR):
+    if (record->tap.count && record->event.pressed) {
+      if (IS_LAYER_ON(_MORPH))
+        process_record_user(LT(_MORPH, JK_WSHL), record);
+      clear_mods();
+      tap_code16(RALT(KC_9));
       set_mods(_mods);
       return false;
     }
