@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_KEY_EMU] = LAYOUT_60_iso( /* Key Emulation - Fn2 */
     KC_GRV,       KC_F1,     KC_F2,      KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_DEL,
     LCTL(KC_TAB), KC_TRNS,   KC_TRNS,    KC_END,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
-    KC_TRNS,      KC_HOME,   KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_INS,
+    KC_CAPS,      KC_HOME,   KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_INS,
     KC_TRNS,      KC_TRNS,   KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_PGDN,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_UP,
     KC_TRNS,      KC_TRNS,   MO(_MORPH),                               KC_TRNS,                                KC_TRNS,  KC_LEFT,  KC_DOWN,  KC_RIGHT),
 
@@ -86,26 +86,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_PGUP,  KC_TRNS,  KC_TRNS,        KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,
     KC_TRNS,   KC_TRNS,  KC_TRNS,                                KC_TRNS,                                      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 };
-
-bool caps_word_press_user(uint16_t keycode) {
-  switch (keycode) {
-    // Keycodes that continue Caps Word, with shift applied.
-  case KC_A ... KC_Z:
-  case KC_SLSH:
-    add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
-    return true;
-
-    // Keycodes that continue Caps Word, without shifting.
-  case KC_1 ... KC_0:
-  case KC_BSPC:
-  case KC_DEL:
-  case S(KC_SLSH):
-    return true;
-
-  default:
-    return false;  // Deactivate Caps Word.
-  }
-}
 
 uint8_t _mods;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
